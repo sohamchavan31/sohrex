@@ -2,6 +2,20 @@
 
 ---
 
+## 2026-06-07 — README Rewrite
+
+**Requested**: Update README to reflect the actual project.
+
+**What was done**:
+- Replaced default Vite template README with project-specific documentation
+- Covers stack, folder structure, sections, branch layout, design tokens, and dev commands
+
+**Files modified**: `README.md`
+
+**Commands run**: `git add README.md && git commit && git push origin dev`
+
+---
+
 ## 2026-06-07 — Git Branch Setup & GitHub PR Workflow
 
 **Requested**: Organize codebase into multiple feature branches and push to GitHub with PRs.
