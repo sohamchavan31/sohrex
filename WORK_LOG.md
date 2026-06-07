@@ -2,6 +2,23 @@
 
 ---
 
+## 2026-06-07 — Production Release: dev → main (v1)
+
+**Requested**: Merge dev into main for production deployment via PR.
+
+**What was done**:
+- Created PR #8 on GitHub: `dev` → `main`
+- PR merged — all portfolio work now on `main`
+- Vercel auto-deploy triggered from `main`
+- Local `main` synced with `git pull origin main`
+
+**State after merge**:
+- `main` — full portfolio v1, production-ready
+- `dev` — in sync with main
+- All feature branches archived on GitHub
+
+---
+
 ## 2026-06-07 — Contact Section: Start a Project Modal
 
 **Requested**: Add a "Start a Project" discovery modal below the simple contact form.
