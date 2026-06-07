@@ -2,6 +2,28 @@
 
 ---
 
+## 2026-06-07 — Contact Section: Start a Project Modal
+
+**Requested**: Add a "Start a Project" discovery modal below the simple contact form.
+
+**What was done**:
+- Replaced `Contact.jsx` with new version — layout unchanged on left (social links), right side gets form + new CTA
+- Added `START A PROJECT →` banner below the message form that opens a dark glass modal
+- Modal is a 4-step flow with step validation and animated transitions:
+  - Step 1: Name, Email, Company
+  - Step 2: Project type (pill selector) + description textarea
+  - Step 3: Budget range (list) + timeline (pills)
+  - Step 4: Extra context + summary panel
+- Submits to Formspree (`xeewanrl`) as JSON POST
+- Success state: personalised confirmation with first name + email
+- Backdrop click closes modal; progress bar in header tracks current step
+- Matches existing design system: `#111111` background, accent green borders, font-mono labels
+
+**Files modified**: `src/components/sections/Contact.jsx`  
+**Commands run**: `git add ... && git commit && git push origin dev`
+
+---
+
 ## 2026-06-07 — Portfolio Content Update
 
 **Requested**: Replace all placeholder content with real data across Contact, Hero, TerminalBoot, About, Skills, and Projects sections.
