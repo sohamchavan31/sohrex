@@ -66,6 +66,25 @@ const TIMELINES = [
 
 export default function Contact() {
   const [modalOpen, setModalOpen] = useState(false)
+  const [quick, setQuick] = useState({ name: '', email: '', message: '' })
+  const [quickSending, setQuickSending] = useState(false)
+  const [quickSent, setQuickSent] = useState(false)
+
+  const handleQuickSubmit = async () => {
+    if (!quick.name || !quick.email || !quick.message) return
+    setQuickSending(true)
+    try {
+      await fetch('https://formspree.io/f/xeewanrl', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: quick.name, email: quick.email, message: quick.message }),
+      })
+    } catch (e) {
+      console.error('Formspree error:', e)
+    }
+    setQuickSending(false)
+    setQuickSent(true)
+  }
 
   return (
     <>
@@ -125,28 +144,59 @@ export default function Contact() {
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 24 }}>
                   {'>'} Send a message
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  {[
-                    { id: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
-                    { id: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
-                  ].map((field) => (
-                    <div key={field.id}>
-                      <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>{field.label}</label>
-                      <input type={field.type} placeholder={field.placeholder} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', fontSize: '0.9rem', outline: 'none', transition: 'border-color 0.2s' }}
+                {quickSent ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{ textAlign: 'center', padding: '32px 0' }}
+                  >
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.4rem', color: 'var(--accent)', marginBottom: 10 }}>✓</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: 'var(--text-primary)', marginBottom: 8 }}>SENT.</div>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                      I'll get back to you at <span style={{ color: 'var(--accent)' }}>{quick.email}</span>.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                    {[
+                      { id: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
+                      { id: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
+                    ].map((field) => (
+                      <div key={field.id}>
+                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>{field.label}</label>
+                        <input
+                          type={field.type}
+                          placeholder={field.placeholder}
+                          value={quick[field.id]}
+                          onChange={e => setQuick(prev => ({ ...prev, [field.id]: e.target.value }))}
+                          style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', fontSize: '0.9rem', outline: 'none', transition: 'border-color 0.2s' }}
+                          onFocus={e => e.target.style.borderColor = 'rgba(0,255,148,0.4)'}
+                          onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                        />
+                      </div>
+                    ))}
+                    <div>
+                      <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>Message</label>
+                      <textarea
+                        rows={3}
+                        placeholder="Tell me what's on your mind..."
+                        value={quick.message}
+                        onChange={e => setQuick(prev => ({ ...prev, message: e.target.value }))}
+                        style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', fontSize: '0.9rem', outline: 'none', resize: 'vertical', transition: 'border-color 0.2s' }}
                         onFocus={e => e.target.style.borderColor = 'rgba(0,255,148,0.4)'}
                         onBlur={e => e.target.style.borderColor = 'var(--border)'}
                       />
                     </div>
-                  ))}
-                  <div>
-                    <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.15em', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>Message</label>
-                    <textarea rows={3} placeholder="Tell me what's on your mind..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', fontSize: '0.9rem', outline: 'none', resize: 'vertical', transition: 'border-color 0.2s' }}
-                      onFocus={e => e.target.style.borderColor = 'rgba(0,255,148,0.4)'}
-                      onBlur={e => e.target.style.borderColor = 'var(--border)'}
-                    />
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleQuickSubmit}
+                      disabled={quickSending}
+                      style={{ width: '100%', justifyContent: 'center', opacity: quickSending ? 0.6 : 1 }}
+                    >
+                      {quickSending ? 'Sending...' : 'Send Message'}
+                    </button>
                   </div>
-                  <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Send Message</button>
-                </div>
+                )}
               </div>
 
               {/* Start a Project CTA */}
