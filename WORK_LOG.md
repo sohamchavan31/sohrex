@@ -2,6 +2,24 @@
 
 ---
 
+## 2026-06-07 — Portfolio Content Update
+
+**Requested**: Replace all placeholder content with real data across Contact, Hero, TerminalBoot, About, Skills, and Projects sections.
+
+**Changes made**:
+- `Contact.jsx` — real email (sohamchavsn03@gmail.com), GitHub (sohamchavan31), LinkedIn (sohamsc01)
+- `Hero.jsx` — "SYSTEM BUILDER" → "BACKEND DEVELOPER"
+- `TerminalBoot.jsx` — identity line updated to `> identity: Soham_Chavan`
+- `About.jsx` — bio updated for Samuel Aaron Trading / Richline Group role; stats: 5+ Projects Built, 2+ Years Building, 1 Production System; tagline updated to "Backend-first. Java-driven."
+- `skills.js` — all 4 groups replaced: Backend Systems (Java 17, Spring Boot 3, Python, Django/DRF, Node.js, Express.js, REST APIs, WebSockets), Frontend Systems, Data & Infra, Tools & Auth
+- `projects.js` — MIS and Pest Control updated with real descriptions, private repo notes, correct stacks; 4 other cards replaced (F1 Race Replay Engine, Jewelary AR App, Drum Kit, Portfolio)
+- `Projects.jsx` — GitHub button now conditionally rendered; shows private note text when `github: null`
+
+**Files modified**: 7 source files  
+**Commands run**: `git add ... && git commit && git push origin dev`
+
+---
+
 ## 2026-06-07 — README Rewrite
 
 **Requested**: Update README to reflect the actual project.
