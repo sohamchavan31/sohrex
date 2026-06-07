@@ -122,7 +122,7 @@ export default function Hero() {
                 textTransform: 'uppercase',
               }}
             >
-              {'>'} System Builder
+              {'>'} Backend Developer
             </span>
           </motion.div>
 

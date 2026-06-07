@@ -5,7 +5,7 @@ const LINES = [
   { text: '> initializing system...',     delay: 0 },
   { text: '> loading modules...',         delay: 600 },
   { text: '> mounting interface...',      delay: 1200 },
-  { text: '> Soham_Chavan identified',    delay: 1800, accent: true },
+  { text: '> identity: Soham_Chavan',      delay: 1800, accent: true },
   { text: '> status: SYSTEM READY',       delay: 2400, accent: true },
 ]
 
