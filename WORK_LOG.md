@@ -2,6 +2,11 @@
 
 ---
 
+## PENDING
+- [ ] Replace `public/resume.pdf` with real resume — Hero download button points to `/resume.pdf`
+
+---
+
 ## 2026-06-07 — Production Release: dev → main (v1)
 
 **Requested**: Merge dev into main for production deployment via PR.
