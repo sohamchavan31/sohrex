@@ -2,7 +2,7 @@
 
 Personal portfolio of **Soham Chavan**, a software developer who builds backend-first, logic-driven systems.
 
-Live at: _coming soon_
+Live at: https://sohrex.vercel.app
 
 ---
 
